@@ -1,1 +1,4 @@
-services:
+#version: '3'
+#services:
+#  rest:
+#  nodejs_app:
