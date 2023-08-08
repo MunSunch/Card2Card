@@ -7,6 +7,7 @@ import com.munsun.application.card2card_project.repository.CrudRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -24,6 +25,8 @@ public class ConfirmRepositoryImpl implements CrudRepository<ConfirmTransfer> {
     private final ConcurrentHashMap<Long, ConfirmTransfer> confirmsIndexByOperationIdTransfer;
     private final AtomicLong generatorId;
     private final Gson gson;
+    @Value("${confirms.file.location}")
+    private String pathFile;
 
     @Autowired
     public ConfirmRepositoryImpl(Gson gson) {
@@ -34,8 +37,8 @@ public class ConfirmRepositoryImpl implements CrudRepository<ConfirmTransfer> {
     }
 
     @PostConstruct
-    public void postConstruct() throws IOException {
-        Path path = Path.of("confirms.json");
+    protected void postConstruct() throws IOException {
+        Path path = Path.of(pathFile);
         String in = "";
         try {
             in = Files.readString(path);
@@ -54,10 +57,10 @@ public class ConfirmRepositoryImpl implements CrudRepository<ConfirmTransfer> {
     }
 
     @PreDestroy
-    public void preDestroy() throws IOException {
-        Path path = Path.of("confirms.json");
+    protected void preDestroy() throws IOException {
+        Path path = Path.of(pathFile);
         String out = gson.toJson(confirms.values());
-        Files.writeString(Path.of("confirms.json"), out);
+        Files.writeString(path, out);
     }
 
     @Override

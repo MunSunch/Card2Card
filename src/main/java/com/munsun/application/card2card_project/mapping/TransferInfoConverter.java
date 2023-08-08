@@ -1,7 +1,6 @@
 package com.munsun.application.card2card_project.mapping;
 
 import com.munsun.application.card2card_project.dto.in.TransferInfoDtoIn;
-import com.munsun.application.card2card_project.exception.CardNotFoundException;
 import com.munsun.application.card2card_project.model.TransferInfo;
 import com.munsun.application.card2card_project.repository.impl.CardRepositoryImpl;
 import org.modelmapper.Converter;
@@ -18,18 +17,16 @@ public class TransferInfoConverter implements Converter<TransferInfoDtoIn, Trans
         this.cardRepository = cardRepository;
     }
 
+    // ?
     @Override
     public TransferInfo convert(MappingContext<TransferInfoDtoIn, TransferInfo> mappingContext) {
         var source = mappingContext.getSource();
         TransferInfo result = new TransferInfo();
-        try {
-            result.setCardFrom(cardRepository.findCardByNumber(source.getCardFromNumber())
-                    .orElseThrow(CardNotFoundException::new));
-            result.setCardTo(cardRepository.findCardByNumber(source.getCardToNumber())
-                    .orElseThrow(CardNotFoundException::new));
-        } catch (CardNotFoundException e) {
-            e.printStackTrace();
-        }
+        result.setCardFrom(cardRepository
+                .findCardByNumberAndValidTillAndCvv(source.getCardFromNumber(), source.getCardFromValidTill(), source.getCardFromCVV())
+                .orElse(null));
+        result.setCardTo(cardRepository.findCardByNumber(source.getCardToNumber())
+                .orElse(null));
         result.setCurrency(source.getAmountDtoIn().getCurrency());
         result.setValue(source.getAmountDtoIn().getValue());
         return result;

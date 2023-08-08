@@ -1,7 +1,7 @@
 package com.munsun.application.card2card_project.exception;
 
 public class TransferException extends Exception{
-    private final long operationId;
+    private long operationId;
 
     public TransferException(String message, long operationId) {
         super(message);
@@ -10,6 +10,10 @@ public class TransferException extends Exception{
 
     public TransferException() {
         this.operationId = 0;
+    }
+
+    public TransferException(String message) {
+        super(message);
     }
 
     public long getOperationId() {

@@ -9,6 +9,7 @@ import com.munsun.application.card2card_project.repository.CrudRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ObjectUtils;
 
@@ -29,6 +30,8 @@ public class TransferRepositoryImpl implements CrudRepository<TransferInfo>{
     private final CardRepository cardRepository;
     private final AtomicLong generatorId;
     private final Gson gson;
+    @Value("${transfers.file.location}")
+    private String pathFile;
 
     @Autowired
     public TransferRepositoryImpl(CardRepository cardRepository, Gson gson) {
@@ -39,8 +42,8 @@ public class TransferRepositoryImpl implements CrudRepository<TransferInfo>{
     }
 
     @PostConstruct
-    public void postConstruct() throws IOException {
-        Path path = Path.of("transfers.json");
+    protected void postConstruct() throws IOException {
+        Path path = Path.of(pathFile);
         String in = "";
         try {
             in = Files.readString(path);
@@ -58,10 +61,10 @@ public class TransferRepositoryImpl implements CrudRepository<TransferInfo>{
     }
 
     @PreDestroy
-    public void preDestroy() throws IOException {
-        Path path = Path.of("transfers.json");
+    protected void preDestroy() throws IOException {
+        Path path = Path.of(pathFile);
         String out = gson.toJson(transfers.values());
-        Files.writeString(Path.of("transfers.json"), out);
+        Files.writeString(path, out);
     }
 
     @Override

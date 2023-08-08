@@ -74,8 +74,6 @@ public class ModelMapperTests {
 
         TransferInfoDtoOut expected = new TransferInfoDtoOut();
             expected.setCardFromNumber("1111222233334444");
-            expected.setCardFromValidTill("11/29");
-            expected.setCardFromCVV("777");
             expected.setCardToNumber("5555666677778888");
                 AmountDtoOut amountDtoOut = new AmountDtoOut();
                     amountDtoOut.setCurrency("RUR");

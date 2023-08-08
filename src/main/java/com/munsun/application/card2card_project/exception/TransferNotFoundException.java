@@ -5,5 +5,9 @@ public class TransferNotFoundException extends TransferException{
         super(message, operationId);
     }
 
+    public TransferNotFoundException(long operationId) {
+        this("Транзакция не найдена", operationId);
+    }
+
     public TransferNotFoundException() {}
 }

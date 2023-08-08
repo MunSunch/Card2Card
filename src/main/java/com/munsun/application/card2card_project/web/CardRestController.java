@@ -22,7 +22,7 @@ public class CardRestController {
     }
 
     @PostMapping("/add")
-    public CardDtoOut addCard(@RequestBody CardDtoIn cardDtoIn) {
+    public CardDtoOut addCard(@RequestBody @Valid CardDtoIn cardDtoIn) {
         return service.add(cardDtoIn);
     }
 

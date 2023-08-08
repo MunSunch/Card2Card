@@ -10,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ObjectUtils;
 
@@ -26,6 +27,8 @@ public class CardRepositoryImpl implements CrudRepository<Card>, CardRepository 
     private final AtomicLong generatorId;
     private final ConcurrentHashMap<String, Card> cardsIndexByNumberCard;
     private final Gson gson;
+    @Value("${cards.file.location}")
+    private String pathFile;
 
     @Autowired
     public CardRepositoryImpl(Gson gson) {
@@ -37,7 +40,7 @@ public class CardRepositoryImpl implements CrudRepository<Card>, CardRepository 
 
     @PostConstruct
     public void postConstruct() throws IOException {
-        Path path = Path.of("cards.json");
+        Path path = Path.of(pathFile);
         String in = "";
         try {
             in = Files.readString(path);
@@ -57,15 +60,9 @@ public class CardRepositoryImpl implements CrudRepository<Card>, CardRepository 
 
     @PreDestroy
     public void preDestroy() throws IOException {
-        Path path = Path.of("cards.json");
+        Path path = Path.of(pathFile);
         String out = gson.toJson(cards.values());
-        Files.writeString(Path.of("cards.json"), out);
-    }
-
-    @Override
-    public boolean isActive(String number, String validTill, String cvv) {
-        var temp = cardsIndexByNumberCard.get(number);
-        return temp.getIsActive();
+        Files.writeString(path, out);
     }
 
     @Override
@@ -83,11 +80,6 @@ public class CardRepositoryImpl implements CrudRepository<Card>, CardRepository 
     @Override
     public Optional<Card> findCardByNumber(String number) {
         return Optional.ofNullable(cardsIndexByNumberCard.get(number));
-    }
-
-    @Override
-    public boolean isExists(String number) {
-        return findCardByNumber(number).isPresent();
     }
 
     @Override

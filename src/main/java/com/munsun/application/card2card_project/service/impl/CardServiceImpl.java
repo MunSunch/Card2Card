@@ -19,26 +19,25 @@ import java.util.Random;
 @Log4j2
 @Service
 public class CardServiceImpl implements CardService {
-    private CardRepositoryImpl cardRepository;
-    private final ModelMapper modelMapper;
+    private final CardRepositoryImpl cardRepository;
+    private final ModelMapper mapper;
 
     @Autowired
-    public CardServiceImpl(CardRepositoryImpl cardRepository, ModelMapper modelMapper) {
+    public CardServiceImpl(CardRepositoryImpl cardRepository, ModelMapper mapper) {
         this.cardRepository = cardRepository;
-        this.modelMapper = modelMapper;
+        this.mapper = mapper;
     }
 
     @Override
     public CardDtoOut add(CardDtoIn cardDtoIn) {
-        log.info("create new card");
+        log.info("create new card: {}", cardDtoIn);
         Card newCard = new Card();
             newCard.setCurrency(cardDtoIn.getCurrency());
             newCard.setCardValidTill(getCardValidTill());
             newCard.setValue(0L);
             newCard.setCardNumber(getCardNumber());
             newCard.setCardCVV(getCardCvv());
-//        return mapper.map(cardRepository.add(newCard));
-        return null;
+        return mapper.map(cardRepository.add(newCard), CardDtoOut.class);
     }
 
     private String getCardValidTill() {
@@ -67,22 +66,21 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public CardDtoOut upBalance(CardBalanceDtoIn cardBalanceDtoIn) throws CardNotFoundException {
-        log.info("up card balance");
+        log.info("up card balance: {}", cardBalanceDtoIn);
         Card card = cardRepository.findCardByNumber(cardBalanceDtoIn.getCardNumber())
                 .orElseThrow(() -> {
-                    log.error("Card is not found: "+cardBalanceDtoIn.getCardNumber());
+                    log.error("Card is not found: {}", cardBalanceDtoIn.getCardNumber());
                     return new CardNotFoundException();
                 });
         card.setValue(card.getValue() + cardBalanceDtoIn.getValue());
-//        return mapper.map(card);
-        return null;
+        return mapper.map(card, CardDtoOut.class);
     }
 
     @Override
     public List<CardDtoOut> getCards() {
-//        return cardRepository.getAll().stream()
-//                .map(mapper::map)
-//                .toList();
-        return null;
+        log.info("get cards");
+        return cardRepository.getAll().stream()
+                .map(x -> mapper.map(x, CardDtoOut.class))
+                .toList();
     }
 }

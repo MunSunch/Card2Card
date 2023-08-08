@@ -37,7 +37,7 @@ public class TransferRestController {
         return transferService.confirm(info);
     }
 
-    @GetMapping("/transfer/all")
+    @GetMapping("/transfers/get")
     public List<TransferInfoDtoOut> getAll() {
         log.info("GET /transfer/all");
         return transferService.getAll();

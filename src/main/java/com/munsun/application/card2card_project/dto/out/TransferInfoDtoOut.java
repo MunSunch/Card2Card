@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransferInfoDtoOut {
+    private Long operationId;
     private String cardFromNumber;
-    private String cardFromValidTill;
-    private String cardFromCVV;
     private String cardToNumber;
     @JsonProperty("amount")
     private AmountDtoOut amountDtoOut;
+    private boolean status;
 }
