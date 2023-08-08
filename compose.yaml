@@ -1,4 +1,7 @@
-#version: '3'
-#services:
-#  rest:
-
+version: '3'
+services:
+  card2card-rest:
+    build:
+      context: .
+    ports:
+      - "5500:5500"

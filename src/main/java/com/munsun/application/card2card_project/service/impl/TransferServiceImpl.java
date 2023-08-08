@@ -45,6 +45,11 @@ public class TransferServiceImpl implements TransferService {
         TransferInfo result = mapper.map(info, TransferInfo.class);
         postCheckTransfer(result);
         var transfer = transferRepository.add(result);
+        log.debug("CardFrom="+transfer.getCardFrom().getCardNumber() + " " +
+                "CardTo="+transfer.getCardTo().getCardNumber() + " " +
+                "Currency="+transfer.getCurrency() + " " +
+                "Value="+transfer.getValue() + " " +
+                "Status="+transfer.isStatus());
         return new SuccessTransferDtoOut(transfer.getOperationId());
     }
 
