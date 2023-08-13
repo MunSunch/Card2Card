@@ -9,7 +9,8 @@ RESTful приложение для перевода денег с карты н
 ```
 docker compose up
 ```
-Образ доступен для скачивания с докер хаба [munirsunchalyaev/card2card](https://hub.docker.com/r/munirsunchalyaev/card2card)
+Образ доступен для скачивания с докер хаба [munirsunchalyaev/card2card](https://hub.docker.com/r/munirsunchalyaev/card2card). Для корректной работы 
+смаппить на порт 5500.
 ## Перед началом работы
 Для тестирования задания было создано дополнительное API для взаимодействия с картами. Так, при запуске контейнера создаются новые карты с балансом 
 1000 у.е., данные которых можно узнать в логах. К примеру: 
@@ -19,13 +20,13 @@ docker compose up
 ```
 ## Примеры запросов
 1) Транзакция с подтверждением кодом. Смотрим в логах доступные карты:
-   ```
-   2023-08-13 15:06:27 2023-08-13 12:06:27,223  INFO  [        main] c.m.a.c.service.impl.CardServiceImpl     : Card: number=9642106773770464, validTill=08/28, cvv=211, value=1000, currency=RUR 
-   2023-08-13 15:06:27 2023-08-13 12:06:27,223  INFO  [        main] c.m.a.c.service.impl.CardServiceImpl     : Card: number=4420185285230483, validTill=08/28, cvv=655, value=1000, currency=RUR 
-   ```
-   [](<img width="1440" alt="image" src="https://github.com/MunSunch/Card2Card/assets/61779834/18ab8f0a-fed3-457b-8b72-2e6ae5dc5e99">
-)
-
+   Выполняем перевод
+   Смотрим результаты транзакции в /transfer-logs.log
+3) Карта не найдена
+4) Недостаточно средств для перевода
+Примеры запросов без фронта
+   
+   
 
 
 
