@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Log4j2
 @Repository
-public class CardRepositoryImpl implements CrudRepository<Card>, CardRepository {
+public class CardRepositoryImpl implements CardRepository {
     private final ConcurrentHashMap<Long, Card> cards;
     private final AtomicLong generatorId;
     private final ConcurrentHashMap<String, Card> cardsIndexByNumberCard;
@@ -73,6 +73,7 @@ public class CardRepositoryImpl implements CrudRepository<Card>, CardRepository 
             if(!temp.getCardValidTill().equals(validTill) || !temp.getCardCVV().equals(cvv)) {
                 return Optional.empty();
             }
+            return card;
         }
         return card;
     }
@@ -102,17 +103,17 @@ public class CardRepositoryImpl implements CrudRepository<Card>, CardRepository 
     }
 
     @Override
-    public void setValueCard(String number, Long value) throws CardNotFoundException {
-        var card = findCardByNumber(number).orElseThrow(CardNotFoundException::new);
-        card.setValue(value);
-    }
-
-    @Override
     public Optional<Card> get(Long id) {
         return Optional.of(cards.get(id));
     }
 
     public List<Card> getAll() {
         return new ArrayList<>(cards.values());
+    }
+
+    @Override
+    public void setValueCard(String cardNumber, long valueFromAfterTransfer) throws CardNotFoundException {
+        findCardByNumber(cardNumber).orElseThrow(CardNotFoundException::new)
+                .setValue(valueFromAfterTransfer);
     }
 }

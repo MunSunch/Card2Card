@@ -5,3 +5,5 @@ services:
       context: .
     ports:
       - "5500:5500"
+    volumes:
+      - ${PWD}/log:/log

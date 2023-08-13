@@ -5,6 +5,7 @@ import com.munsun.application.card2card_project.dto.in.CardDtoIn;
 import com.munsun.application.card2card_project.dto.out.CardDtoOut;
 import com.munsun.application.card2card_project.exception.CardNotFoundException;
 import com.munsun.application.card2card_project.model.Card;
+import com.munsun.application.card2card_project.repository.CardRepository;
 import com.munsun.application.card2card_project.repository.impl.CardRepositoryImpl;
 import com.munsun.application.card2card_project.service.CardService;
 import lombok.extern.log4j.Log4j2;
@@ -19,11 +20,11 @@ import java.util.Random;
 @Log4j2
 @Service
 public class CardServiceImpl implements CardService {
-    private final CardRepositoryImpl cardRepository;
+    private final CardRepository cardRepository;
     private final ModelMapper mapper;
 
     @Autowired
-    public CardServiceImpl(CardRepositoryImpl cardRepository, ModelMapper mapper) {
+    public CardServiceImpl(CardRepository cardRepository, ModelMapper mapper) {
         this.cardRepository = cardRepository;
         this.mapper = mapper;
     }
@@ -37,6 +38,7 @@ public class CardServiceImpl implements CardService {
             newCard.setValue(0L);
             newCard.setCardNumber(getCardNumber());
             newCard.setCardCVV(getCardCvv());
+            newCard.setIsActive(true);
         return mapper.map(cardRepository.add(newCard), CardDtoOut.class);
     }
 
@@ -59,7 +61,7 @@ public class CardServiceImpl implements CardService {
         return String.valueOf(getRandomNum(100L, 999L));
     }
 
-    protected long getRandomNum(Long min,Long max) {
+    private long getRandomNum(Long min,Long max) {
         var rand = new Random();
         return rand.nextLong(min, max);
     }
@@ -82,5 +84,11 @@ public class CardServiceImpl implements CardService {
         return cardRepository.getAll().stream()
                 .map(x -> mapper.map(x, CardDtoOut.class))
                 .toList();
+    }
+
+    @Override
+    public CardDtoOut findCardByNumber(String number) throws CardNotFoundException {
+        return mapper.map(cardRepository.findCardByNumber(number)
+                .orElseThrow(CardNotFoundException::new), CardDtoOut.class);
     }
 }

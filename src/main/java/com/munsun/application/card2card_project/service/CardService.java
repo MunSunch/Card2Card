@@ -11,4 +11,5 @@ public interface CardService {
     CardDtoOut add(CardDtoIn cardDtoIn);
     List<CardDtoOut> getCards();
     CardDtoOut upBalance(CardBalanceDtoIn cardBalanceDtoIn) throws CardNotFoundException;
+    CardDtoOut findCardByNumber(String number) throws CardNotFoundException;
 }

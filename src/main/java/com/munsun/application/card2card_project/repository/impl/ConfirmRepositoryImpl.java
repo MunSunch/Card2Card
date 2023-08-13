@@ -85,4 +85,9 @@ public class ConfirmRepositoryImpl implements CrudRepository<ConfirmTransfer> {
     public Optional<ConfirmTransfer> get(Long id) {
         return Optional.ofNullable(confirms.get(id));
     }
+
+    @Override
+    public List<ConfirmTransfer> getAll() {
+        return confirms.values().stream().toList();
+    }
 }
