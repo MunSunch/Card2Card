@@ -8,6 +8,7 @@ import com.munsun.application.card2card_project.model.Card;
 import com.munsun.application.card2card_project.repository.CardRepository;
 import com.munsun.application.card2card_project.repository.impl.CardRepositoryImpl;
 import com.munsun.application.card2card_project.service.CardService;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,20 @@ public class CardServiceImpl implements CardService {
     public CardServiceImpl(CardRepository cardRepository, ModelMapper mapper) {
         this.cardRepository = cardRepository;
         this.mapper = mapper;
+    }
+
+    @PostConstruct
+    private void postConstruct() throws CardNotFoundException {
+        var c1 = add(new CardDtoIn("RUR"));
+        c1 = upBalance(new CardBalanceDtoIn(c1.getCardNumber(), 1000L));
+        var c2 = add(new CardDtoIn("RUR"));
+        c2 = upBalance(new CardBalanceDtoIn(c2.getCardNumber(), 1000L));
+        log.info("Card: number={}, validTill={}, cvv={}, value={}, currency={}",
+                c1.getCardNumber(), c1.getCardValidTill(), c1.getCardCVV(), c1.getValue(),
+                c1.getCurrency());
+        log.info("Card: number={}, validTill={}, cvv={}, value={}, currency={}",
+                c2.getCardNumber(), c2.getCardValidTill(), c2.getCardCVV(), c2.getValue(),
+                c2.getCurrency());
     }
 
     @Override
