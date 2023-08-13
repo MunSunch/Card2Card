@@ -4,6 +4,7 @@ import com.munsun.application.card2card_project.dto.in.ConfirmTransferDtoIn;
 import com.munsun.application.card2card_project.dto.in.TransferInfoDtoIn;
 import com.munsun.application.card2card_project.dto.out.SuccessTransferDtoOut;
 import com.munsun.application.card2card_project.dto.out.TransferInfoDtoOut;
+import com.munsun.application.card2card_project.exception.TransferNotFoundException;
 
 import java.util.List;
 
@@ -11,4 +12,5 @@ public interface TransferService {
     SuccessTransferDtoOut send(TransferInfoDtoIn info) throws Exception;
     SuccessTransferDtoOut confirm(ConfirmTransferDtoIn info) throws Exception;
     List<TransferInfoDtoOut> getAll();
+    TransferInfoDtoOut getById(long id) throws TransferNotFoundException;
 }

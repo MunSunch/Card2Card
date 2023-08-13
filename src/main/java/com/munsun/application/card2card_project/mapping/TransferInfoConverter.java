@@ -2,6 +2,7 @@ package com.munsun.application.card2card_project.mapping;
 
 import com.munsun.application.card2card_project.dto.in.TransferInfoDtoIn;
 import com.munsun.application.card2card_project.model.TransferInfo;
+import com.munsun.application.card2card_project.repository.CardRepository;
 import com.munsun.application.card2card_project.repository.impl.CardRepositoryImpl;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
@@ -10,10 +11,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TransferInfoConverter implements Converter<TransferInfoDtoIn, TransferInfo> {
-    private final CardRepositoryImpl cardRepository;
+    private final CardRepository cardRepository;
 
     @Autowired
-    public TransferInfoConverter(CardRepositoryImpl cardRepository) {
+    public TransferInfoConverter(CardRepository cardRepository) {
         this.cardRepository = cardRepository;
     }
 

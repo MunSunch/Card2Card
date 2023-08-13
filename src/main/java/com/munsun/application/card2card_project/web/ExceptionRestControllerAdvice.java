@@ -25,8 +25,8 @@ public class ExceptionRestControllerAdvice {
 
     @ExceptionHandler(value = {CardNotFoundException.class, CardNotActiveException.class,
                                ErrorTransferCurrencyException.class, NegativeBalanceAfterTransfer.class,
-                               InvalidConfirmException.class})
-    public ResponseEntity<FailedTransferDtoOut> cardNotActiveExceptionHandler(TransferException e) {
+                               InvalidConfirmException.class, TransferNotFoundException.class})
+    public ResponseEntity<FailedTransferDtoOut> transferExceptionHandler(TransferException e) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new FailedTransferDtoOut(e.getMessage(), e.getOperationId()));

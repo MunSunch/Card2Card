@@ -1,10 +1,9 @@
 package com.munsun.application.card2card_project.mapping;
 
 import com.munsun.application.card2card_project.dto.in.ConfirmTransferDtoIn;
-import com.munsun.application.card2card_project.exception.TransferNotFoundException;
 import com.munsun.application.card2card_project.model.ConfirmTransfer;
-import com.munsun.application.card2card_project.repository.TransferRepository;
-import com.munsun.application.card2card_project.repository.impl.ConfirmRepositoryImpl;
+import com.munsun.application.card2card_project.model.TransferInfo;
+import com.munsun.application.card2card_project.repository.CrudRepository;
 import com.munsun.application.card2card_project.repository.impl.TransferRepositoryImpl;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
@@ -13,10 +12,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ConfirmTransferConverter implements Converter<ConfirmTransferDtoIn, ConfirmTransfer> {
-    private final TransferRepositoryImpl transferRepository;
+    private final CrudRepository<TransferInfo> transferRepository;
 
     @Autowired
-    public ConfirmTransferConverter(TransferRepositoryImpl transferRepository) {
+    public ConfirmTransferConverter(CrudRepository<TransferInfo> transferRepository) {
         this.transferRepository = transferRepository;
     }
 

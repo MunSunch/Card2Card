@@ -26,9 +26,14 @@ public class CardRestController {
         return service.add(cardDtoIn);
     }
 
-    @PutMapping("/balance/up")
+    @PostMapping("/balance/up")
     public CardDtoOut upBalanceCard(@RequestBody @Valid CardBalanceDtoIn cardBalanceDtoIn) throws CardNotFoundException {
         return service.upBalance(cardBalanceDtoIn);
+    }
+
+    @GetMapping("/getByNumber/{number}")
+    public CardDtoOut getByNumber(@PathVariable String number) throws CardNotFoundException {
+        return service.findCardByNumber(number);
     }
 
     @GetMapping("/all")

@@ -5,8 +5,8 @@ import com.munsun.application.card2card_project.model.Card;
 
 import java.util.Optional;
 
-public interface CardRepository {
+public interface CardRepository extends CrudRepository<Card>{
     Optional<Card> findCardByNumberAndValidTillAndCvv(String number, String validTill, String cvv);
     Optional<Card> findCardByNumber(String number);
-    void setValueCard(String number, Long value) throws CardNotFoundException;
+    void setValueCard(String cardNumber, long valueFromAfterTransfer) throws CardNotFoundException;
 }

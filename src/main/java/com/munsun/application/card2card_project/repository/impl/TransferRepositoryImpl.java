@@ -6,6 +6,7 @@ import com.munsun.application.card2card_project.model.Card;
 import com.munsun.application.card2card_project.model.TransferInfo;
 import com.munsun.application.card2card_project.repository.CardRepository;
 import com.munsun.application.card2card_project.repository.CrudRepository;
+import com.munsun.application.card2card_project.repository.TransferRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
-public class TransferRepositoryImpl implements CrudRepository<TransferInfo>{
+public class TransferRepositoryImpl implements TransferRepository {
     private final ConcurrentHashMap<Long, TransferInfo> transfers;
     private final CardRepository cardRepository;
     private final AtomicLong generatorId;
@@ -87,6 +88,13 @@ public class TransferRepositoryImpl implements CrudRepository<TransferInfo>{
     @Override
     public Optional<TransferInfo> get(Long id) {
         return Optional.of(transfers.get(id));
+    }
+
+    @Override
+    public Optional<TransferInfo> findByIdOperation(long idOperation) {
+        return transfers.values().stream()
+                .filter(x -> x.getOperationId() == idOperation)
+                .findFirst();
     }
 
     public List<TransferInfo> getAll() {
