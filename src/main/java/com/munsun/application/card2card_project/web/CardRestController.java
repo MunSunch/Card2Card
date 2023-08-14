@@ -5,6 +5,7 @@ import com.munsun.application.card2card_project.dto.in.CardDtoIn;
 import com.munsun.application.card2card_project.dto.out.CardDtoOut;
 import com.munsun.application.card2card_project.exception.CardNotFoundException;
 import com.munsun.application.card2card_project.service.CardService;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Hidden
 @RequestMapping("/cards")
 public class CardRestController {
     private final CardService service;

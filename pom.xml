@@ -17,7 +17,11 @@
 
 	<properties>
 		<java.version>17</java.version>
+		<org.modelmapper.modelmapper.version>3.1.1</org.modelmapper.modelmapper.version>
+		<org.testcontainers.junit-jupiter.version>1.18.3</org.testcontainers.junit-jupiter.version>
+		<org.springdoc.springdoc-openapi-starter-webmvc-ui.version>2.0.0</org.springdoc.springdoc-openapi-starter-webmvc-ui.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -28,12 +32,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-docker-compose</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--			<optional>true</optional>-->
-<!--		</dependency>-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -56,15 +54,22 @@
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>3.1.1</version>
+			<version>${org.modelmapper.modelmapper.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.testcontainers/junit-jupiter -->
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>1.18.3</version>
+			<version>${org.testcontainers.junit-jupiter.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>${org.springdoc.springdoc-openapi-starter-webmvc-ui.version}</version>
 		</dependency>
 
 	</dependencies>
