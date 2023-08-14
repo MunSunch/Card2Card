@@ -5,6 +5,10 @@ public class CardNotFoundException extends TransferException {
         super(message, operationId);
     }
 
+    public CardNotFoundException(long operationId) {
+        this("Карта или карты не найдены", operationId);
+    }
+
     public CardNotFoundException() {
         this("Карта или карты не найдены", 0L);
     }

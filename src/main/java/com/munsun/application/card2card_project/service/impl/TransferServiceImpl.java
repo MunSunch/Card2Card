@@ -63,13 +63,17 @@ public class TransferServiceImpl implements TransferService {
         cardRepository.findCardByNumberAndValidTillAndCvv(info.getCardFromNumber(),
                         info.getCardFromValidTill(), info.getCardFromCVV())
                 .orElseThrow(() -> {
+                    long idOperation = transferRepository.add(new TransferInfo()).getOperationId();
+                    log.error("Invalid transfer value: idOperation={}", idOperation );
                     log.error("Card not found: {}", info.getCardFromNumber());
-                    return new CardNotFoundException();
+                    return new CardNotFoundException(idOperation);
                 });
         cardRepository.findCardByNumber(info.getCardToNumber())
                 .orElseThrow(() -> {
+                    long idOperation = transferRepository.add(new TransferInfo()).getOperationId();
+                    log.error("Invalid transfer value: idOperation={}", idOperation );
                     log.error("Card not found: {}", info.getCardToNumber());
-                    return new CardNotFoundException();
+                    return new CardNotFoundException(idOperation);
                 });
         log.info("pre check transfer success");
     }
