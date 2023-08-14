@@ -173,4 +173,23 @@ public class TransferRestControllerIntegrationTests {
         assertEquals(500, responseConfirm.getStatusCode().value());
         assertEquals("Неверный код", responseConfirm.getBody().getMessage());
     }
+
+    @Test
+    public void failedSendWithoutConfirm_CardNotFound500() {
+        var dtoTransfer = new TransferInfoDtoIn();
+            dtoTransfer.setCardFromNumber(cardFrom.getCardNumber());
+            dtoTransfer.setCardFromValidTill(cardFrom.getCardValidTill());
+            dtoTransfer.setCardFromCVV(cardFrom.getCardCVV());
+            dtoTransfer.setCardToNumber("1111222233334444");
+            dtoTransfer.setAmountDtoIn(new AmountDtoIn(100L, "RUR"));
+        var expected = new FailedTransferDtoOut();
+            expected.setId(0L);
+            expected.setMessage("Карта или карты не найдены");
+
+        var responseTransfer =
+                restTemplate.postForEntity(host+"/transfer", dtoTransfer, FailedTransferDtoOut.class);
+
+        assertEquals(500, responseTransfer.getStatusCode().value());
+        assertEquals(expected, responseTransfer.getBody());
+    }
 }
