@@ -24,21 +24,21 @@ docker compose up
 2023-08-14 09:28:22 2023-08-14 06:28:22,511  INFO  [        main] c.m.a.c.service.impl.CardServiceImpl     : Card: number=7935486003974100, validTill=08/28, cvv=511, value=1000, currency=RUR 
 ```
 Выполняем перевод
-[](test-transfer.png)
-[](test-transfer-result.png)
+![](test-transfer.png)
+![](test-transfer-result.png)
    Смотрим результаты транзакции в /transfer-logs.log
-[](test-transfer-result-logs.png)
+![](test-transfer-result-logs.png)
 4) Карта не найдена. Ввод несуществующей карты:
-[](test-transfer-error-card_not_found.png)
-[](test-transfer-error-card_not_found-result.png)
+1[](test-transfer-error-card_not_found.png)
+![](test-transfer-error-card_not_found-result.png)
 5) Недостаточно средств для перевода
-[](test-transfer-error-negative_balance.png)
-[](test-transfer-error-negative_balance-result.png)
+![](test-transfer-error-negative_balance.png)
+![](test-transfer-error-negative_balance-result.png)
 
 ## Примеры запросов без фронта
 1) Ошибки заполнения полей DTO.
-[](test-transfer-validation.png)
+![](test-transfer-validation.png)
 2) Подтверждение несуществующей операции.
-[](test-confirm-error-transfer_not_found.png)
+![](test-confirm-error-transfer_not_found.png)
 3) Неверный код подтверждения
-[](test-confirm-error-invalid_code.png)
+![](test-confirm-error-invalid_code.png)
