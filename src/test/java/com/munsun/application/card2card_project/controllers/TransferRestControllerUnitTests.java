@@ -1,17 +1,13 @@
-package com.munsun.application.card2card_project.web;
+package com.munsun.application.card2card_project.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.munsun.application.card2card_project.dto.in.AmountDtoIn;
 import com.munsun.application.card2card_project.dto.in.ConfirmTransferDtoIn;
 import com.munsun.application.card2card_project.dto.in.TransferInfoDtoIn;
 import com.munsun.application.card2card_project.dto.out.FailedTransferDtoOut;
-import com.munsun.application.card2card_project.model.TransferInfo;
 import com.munsun.application.card2card_project.service.TransferService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc

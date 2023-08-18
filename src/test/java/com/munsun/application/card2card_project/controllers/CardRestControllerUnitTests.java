@@ -1,11 +1,10 @@
-package com.munsun.application.card2card_project.web;
+package com.munsun.application.card2card_project.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.munsun.application.card2card_project.dto.in.CardBalanceDtoIn;
 import com.munsun.application.card2card_project.dto.in.CardDtoIn;
 import com.munsun.application.card2card_project.dto.out.FailedTransferDtoOut;
 import com.munsun.application.card2card_project.service.CardService;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;

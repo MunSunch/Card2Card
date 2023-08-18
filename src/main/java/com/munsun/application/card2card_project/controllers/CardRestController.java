@@ -1,4 +1,4 @@
-package com.munsun.application.card2card_project.web;
+package com.munsun.application.card2card_project.controllers;
 
 import com.munsun.application.card2card_project.dto.in.CardBalanceDtoIn;
 import com.munsun.application.card2card_project.dto.in.CardDtoIn;

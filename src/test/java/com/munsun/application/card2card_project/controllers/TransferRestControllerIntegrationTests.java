@@ -1,10 +1,9 @@
-package com.munsun.application.card2card_project.web;
+package com.munsun.application.card2card_project.controllers;
 
 import com.munsun.application.card2card_project.dto.in.*;
 import com.munsun.application.card2card_project.dto.out.*;
 import com.munsun.application.card2card_project.exception.CardNotFoundException;
 import com.munsun.application.card2card_project.exception.TransferNotFoundException;
-import com.munsun.application.card2card_project.model.Card;
 import com.munsun.application.card2card_project.service.CardService;
 import com.munsun.application.card2card_project.service.TransferService;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,13 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 import java.nio.file.Path;
 
