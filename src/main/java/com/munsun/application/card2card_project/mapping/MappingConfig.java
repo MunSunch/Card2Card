@@ -1,5 +1,6 @@
 package com.munsun.application.card2card_project.mapping;
 
+import com.munsun.application.card2card_project.ApplicationContextProvider;
 import com.munsun.application.card2card_project.dto.in.ConfirmTransferDtoIn;
 import com.munsun.application.card2card_project.dto.in.TransferInfoDtoIn;
 import com.munsun.application.card2card_project.dto.out.TransferInfoDtoOut;

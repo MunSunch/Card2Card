@@ -1,4 +1,4 @@
-package com.munsun.application.card2card_project.mapping;
+package com.munsun.application.card2card_project;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
