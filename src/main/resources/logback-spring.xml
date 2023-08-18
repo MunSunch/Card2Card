@@ -1,4 +1,7 @@
 <configuration>
+    <springProperty scope="context" name="LOG_PATH" source="logging.path"/>
+    <springProperty scope="context" name="LOG_FILE_NAME" source="logging.file.name"/>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%date  %highlight(%-5level) [%12.12thread] %cyan(%-40.40logger{40}) : %msg %n</pattern>
@@ -7,7 +10,7 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>transfer-logs.log</file>
+        <file>${LOG_PATH}/${LOG_FILE_NAME}</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
             <onMatch>ACCEPT</onMatch>
