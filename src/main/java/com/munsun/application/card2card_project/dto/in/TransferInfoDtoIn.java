@@ -25,7 +25,7 @@ public class TransferInfoDtoIn {
     private String cardFromNumber;
 
     @Schema(description = "Срок действия карты источника")
-    @Pattern(regexp = "^(0[1-9]|[10-12])/2[3-9]$",
+    @Pattern(regexp = "^(0[1-9]|[10-12])/[2-3][3-9]$",
              message = "Срок действия карты должен быть указан форматом: месяц/год")
     private String cardFromValidTill;
 
