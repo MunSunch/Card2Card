@@ -1,16 +1,15 @@
 <configuration>
-    <springProperty scope="context" name="LOG_PATH" source="logging.path"/>
+    <springProperty scope="context" name="LOG_FILE_PATH" source="logging.file.path"/>
     <springProperty scope="context" name="LOG_FILE_NAME" source="logging.file.name"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%date  %highlight(%-5level) [%12.12thread] %cyan(%-40.40logger{40}) : %msg %n</pattern>
-<!--            <pattern>%d %contextName [%t] %level %logger{36} -%kvp- %msg%n</pattern>-->
         </encoder>
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>${LOG_PATH}/${LOG_FILE_NAME}</file>
+        <file>${LOG_FILE_PATH}/${LOG_FILE_NAME}</file>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>DEBUG</level>
             <onMatch>ACCEPT</onMatch>
@@ -21,7 +20,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.munsun.application.card2card_project.service.impl.TransferServiceImpl"
+    <logger name="com.munsun.card2card_project.application.service.impl.TransferServiceImpl"
         level="DEBUG">
         <appender-ref ref="FILE"/>
     </logger>
