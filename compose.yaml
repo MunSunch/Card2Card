@@ -6,4 +6,4 @@ services:
     ports:
       - "5500:5500"
     volumes:
-      - ${PWD}/log:/log
+      - ${PWD}/log:/opt/app/log
