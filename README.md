@@ -7,6 +7,10 @@ RESTful приложение для перевода денег с карты н
 /transfer-logs.log
     Документация по API: http://localhost:5500/swagger-ui/index.html
 ## Запуск
+Перейти в корень, собрать проект:
+```
+mvn clean package --Dskiptests
+```
 В корневой папке выполнить команду:
 ```
 docker compose up
